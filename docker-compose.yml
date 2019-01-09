@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    networks:
+      - laravel-app
+    volumes:
+      - ./:/var/www/html
+
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    # working_dir: /var/www/html
+    networks:
+      - laravel-app
+    volumes:
+      - ./:/var/www/html
+      - ./vhost.conf:/etc/nginx/sites-available/default.conf
+      # - ./logs/nginx/:/var/logs/nginx
+      # - ./ssl/:/etc/nginx/ssl
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+
+networks:
+  laravel-app:
