@@ -49,6 +49,11 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-EXPOSE 80 443
+# start nginx
+ADD ./start-up.sh /opt/start-up.sh
 
-ENTRYPOINT ["./start-up.sh"]
+RUN sed -i 's/\r//g' /opt/start-up.sh
+
+CMD ["/bin/bash", "./start-up.sh"]
+
+EXPOSE 80 443
