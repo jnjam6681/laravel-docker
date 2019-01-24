@@ -9,6 +9,9 @@ RUN apt-get update -y && apt-get install -y \
   # build-base \
   # libmemcached-dev \
   libmcrypt-dev \
+  libjpeg-dev \
+  libpng-dev \
+  libmcrypt-dev \
   libxml2-dev
   # zlib-dev \
   # autoconf \
@@ -17,6 +20,12 @@ RUN apt-get update -y && apt-get install -y \
   # supervisor
 
 RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml pcntl
+
+# install the PHP gd library
+RUN docker-php-ext-configure gd \
+    --with-jpeg-dir=/usr/lib \
+    --with-freetype-dir=/usr/include/freetype2 && \
+    docker-php-ext-install gd
 
 # install postgresql drivers
 RUN apt-get update -y && apt-get install -y libpq-dev \
