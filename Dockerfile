@@ -54,6 +54,6 @@ ADD ./start-up.sh /opt/start-up.sh
 
 RUN sed -i 's/\r//g' /opt/start-up.sh
 
-CMD ["/bin/bash", "./start-up.sh"]
+CMD ["/bin/bash", "/opt/start-up.sh"]
 
 EXPOSE 80 443
