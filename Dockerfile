@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get install -y \
   libmcrypt-dev \
   libjpeg-dev \
   libpng-dev \
-  libmcrypt-dev \
+  libfreetype6-dev \
   libxml2-dev
   # zlib-dev \
   # autoconf \
@@ -19,9 +19,9 @@ RUN apt-get update -y && apt-get install -y \
   # libgsasl-dev
   # supervisor
 
-RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml pcntl
+RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml pcntl bcmath
 
-# install the PHP gd library
+# Install the PHP gd library
 RUN docker-php-ext-configure gd \
     --with-jpeg-dir=/usr/lib \
     --with-freetype-dir=/usr/include/freetype2 && \
@@ -37,17 +37,14 @@ RUN apt-get update -y && apt-get install -y libzip-dev && \
     # Install the zip extension
     docker-php-ext-install zip
 
-# Install bcmath
-RUN docker-php-ext-install bcmath
-
 # install npm
-# RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
-#     && apt-get update -y && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
+     && apt-get update -y && apt-get install -y nodejs
 
 # install yarn
-# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-#     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-#     && apt-get update -y && apt-get install -y yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update -y && apt-get install -y yarn
 
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
