@@ -56,4 +56,6 @@ RUN sed -i 's/\r//g' /opt/start-up.sh
 
 CMD ["/bin/bash", "/opt/start-up.sh"]
 
+# ENTRYPOINT ["./start-up.sh"]
+
 EXPOSE 80 443
