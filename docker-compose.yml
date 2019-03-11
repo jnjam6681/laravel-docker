@@ -6,6 +6,7 @@ services:
       context: ./
       dockerfile: app.dockerfile
     # volumes:
+    #   - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
     #   - /etc/letsencrypt/archive/:/etc/nginx/ssl/
     networks:
     - laravel-app
