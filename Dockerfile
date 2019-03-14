@@ -1,6 +1,6 @@
 FROM php:7.2-fpm
 
-#install php extentions
+# install php extentions
 RUN apt-get update -y && apt-get install -y \
   gnupg \
   nginx \
@@ -19,6 +19,7 @@ RUN apt-get update -y && apt-get install -y \
   # libgsasl-dev
   # supervisor
 
+# install extension
 RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml pcntl bcmath
 
 # Install the PHP gd library
