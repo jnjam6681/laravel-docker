@@ -14,6 +14,8 @@ COPY vhost.conf /etc/nginx/sites-available/default.conf
 
 RUN composer install
 
+RUN chmod 777 -R bootstrap/ storage/
+
 # RUN npm install
 #
 # RUN yarn install && yarn run prod
